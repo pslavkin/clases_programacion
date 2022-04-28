@@ -1,0 +1,36 @@
+/tags
+/Session.vim
+/build/**
+/doxygen/html/**
+
+
+# Object files
+*.d
+*.d_raw
+*.map
+*.o
+*.ko
+*.obj
+*.elf
+
+# uncoment to track binary files
+
+# !/build/*.s19
+# !/build/*.bin
+# !/build/*.out
+
+
+# hex conversion 
+*.m1
+*.m2
+*.m3
+*.x1
+*.x2
+*.x3
+*linkInfo.xml
+
+
+# Executables
+# *.bin
+# *.s19
+/build/
