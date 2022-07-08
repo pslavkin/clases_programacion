@@ -7,6 +7,8 @@ BLOCK_SIZE = 123
 ARENA_SIZE = 300
 STEP_SIZE = 10
 
+
+
 if __name__ == '__main__':
     pygame.init()
     surface = pygame.display.set_mode((ARENA_SIZE,ARENA_SIZE))
@@ -14,7 +16,7 @@ if __name__ == '__main__':
     block_x, block_y = 0, 0
 #    block = pygame.image.load("resources/block.jpg").convert()
     #surface.blit(block, (block_x, block_y))
-    pygame.draw.rect(surface, (100,45,100), pygame.Rect(block_x,block_y,BLOCK_SIZE, BLOCK_SIZE))
+    pygame.draw.rect(surface, (200,45,100), pygame.Rect(block_x,block_y,BLOCK_SIZE, BLOCK_SIZE))
     pygame.display.flip()
     running = True
     while running:
