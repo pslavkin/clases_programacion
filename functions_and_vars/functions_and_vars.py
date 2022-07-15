@@ -14,4 +14,5 @@ def calcDiaSemana(dia):
 if __name__ == '__main__':
 
     d = calcDiaSemana("domingo")
+
     print(d)
