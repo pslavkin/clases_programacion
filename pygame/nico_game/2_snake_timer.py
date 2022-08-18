@@ -1,5 +1,6 @@
 import pygame
 import time
+import threads
 from pygame.locals import *
 
 GRID_COUNT = 10
@@ -48,6 +49,11 @@ keys={ K_LEFT :"LEFT",
        K_DOWN :"DOWN"
        }
 
+c = pygame.time.Clock()
+print(c.tick(10),type(c))
+
+event=[]
+
 if __name__ == '__main__':
     pygame.init()
     surface = pygame.display.set_mode((ARENA_SIZE,ARENA_SIZE))
@@ -56,18 +62,24 @@ if __name__ == '__main__':
 
     actualDir="DOWN"
     while True:
+
+        event+=pygame.event.get()
+        while len(event)>0:
+            if event[0].type == KEYDOWN:
+                actualDir=keys[event[0].key]
+                print(keys[event[0].key])
+                event.pop(0)
+                break;
+            else:
+                event.pop(0)
+
+        eval(directions[actualDir])
+
         surface.fill(ARENA_COLOR)
         drawSnakeHead(x,y)
         drawGrid()
         pygame.display.flip()
 
-        changed=False
-        for i in range(10):
-            if changed==False:
-                for event in pygame.event.get():
-                    if event.type == KEYDOWN:
-                        actualDir=keys[event.key]
-                        changed=True
-            time.sleep(0.01)
+        time.sleep(.1)
 
-        eval(directions[actualDir])
+
