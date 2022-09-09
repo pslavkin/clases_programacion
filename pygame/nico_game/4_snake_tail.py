@@ -7,11 +7,14 @@ GRID_COUNT = 10
 ARENA_SIZE = 600
 BLOCK_SIZE = ARENA_SIZE // GRID_COUNT
 SNAKE_COLOR = (200,0,0)
+TAIL_COLOR = (0,0,255)
 GRID_COLOR  = (200,200,200)
 ARENA_COLOR = (255,255,255)
 
 def drawSnakeHead(x,y):
     pygame.draw.rect(surface,SNAKE_COLOR , pygame.Rect(BLOCK_SIZE*x,BLOCK_SIZE*y,BLOCK_SIZE, BLOCK_SIZE))
+def drawSnakeTail(x,y):
+    pygame.draw.rect(surface,TAIL_COLOR , pygame.Rect(BLOCK_SIZE*x,BLOCK_SIZE*y,BLOCK_SIZE, BLOCK_SIZE))
 
 def drawHLine(y):
     pygame.draw.line(surface,GRID_COLOR,(0 , BLOCK_SIZE*y),(ARENA_SIZE-1,BLOCK_SIZE*y),1)
@@ -43,11 +46,9 @@ keys={ K_LEFT :"decX()",
        K_DOWN :"incY()",
        }
 
-c = pygame.time.Clock()
-print(c.tick(10),type(c))
 
 event=[]
-
+move_history=[[0,0],[0,0],[0,0],[0,0]]
 if __name__ == '__main__':
     pygame.init()
     surface = pygame.display.set_mode((ARENA_SIZE,ARENA_SIZE))
@@ -61,7 +62,7 @@ if __name__ == '__main__':
             e=event[0]
             event.pop(0)
             if e.type == KEYDOWN:
-                print(actualDir,e.key)
+                #print(actualDir,e.key)
                 if e.key in keys:
                     actualDir=e.key
                     break;
@@ -70,6 +71,12 @@ if __name__ == '__main__':
 
         surface.fill(ARENA_COLOR)
         drawSnakeHead(x,y)
+        for i in range(-4,0):
+            drawSnakeTail(move_history[i][0],move_history[i][1])
+        move_history.append([x,y])
+        if(len(move_history)>4):
+            move_history.pop(0)
+        print(move_history)
         drawGrid()
         pygame.display.flip()
 
